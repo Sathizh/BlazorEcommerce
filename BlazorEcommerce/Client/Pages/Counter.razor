@@ -1,0 +1,28 @@
+﻿@page "/counter"
+
+<PageTitle>Counter</PageTitle>
+
+<h1>Counter</h1>
+
+<p role="status">Count  is: @currentCount</p>
+
+<button class="bg-sky-500 p-2 rounded-md text-white text-" @onclick="IncrementCount">Click me</button>
+
+@code {
+    private int currentCount = 0;
+    private string name="V";
+
+
+    private void IncrementCount()
+    {
+        if (currentCount < 8)
+        {
+            name = "VIGNESH".Substring(0, currentCount);
+            currentCount++;
+
+        }else
+        {
+            currentCount = 0;
+        }
+    }
+}

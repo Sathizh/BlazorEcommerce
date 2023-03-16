@@ -1,0 +1,15 @@
+﻿@page "/s"
+@using System.Net.Http
+@inject HttpClient Http
+<button @onclick="GetIpAddress">Get IP Address</button>
+
+<p>Your IP address is: @ipAddress</p>
+
+@code {
+    private string ipAddress;
+
+    private async Task GetIpAddress()
+    {
+        ipAddress = await Http.GetStringAsync("Product/GetClientIpAddress");
+    }
+}
