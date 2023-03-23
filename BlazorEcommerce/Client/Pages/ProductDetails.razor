@@ -1,0 +1,45 @@
+﻿@page "/product/{id:int}";
+@inject IProductService ProductService;
+
+@if (product == null)
+{
+    <Loader />
+}
+else
+{
+    <div class="flex border rounded-xl mx-10 grid grid-cols-9 ">
+        <div class="flex-none relative border-r col-span-2 ">
+            <img src="@product.ImageURL" alt="@product.Title" class="absolute inset-0 h-full object-fit p-5" loading="lazy" />
+        </div>
+        <div class="flex-auto p-2 flex flex-col gap-3 col-span-5">
+            <div class="text-3xl  font-bold">@product.Title</div>
+            <div class="indent-4">@product.Description</div>
+            <div class="flex justify-between  mr-10">
+                <div class="text-xl font-semibold p-5 first-letter:text-green-500">$ @product.Price</div>
+                <div class="flex items-center cursor-pointer justify-center ratio rounded-full w-12 h-12 bg-red-100 text-red-500 hover:border border-red-500 "><svg width="20" height="20" transform="" transform-origin="0% 0% 0" style="transform: translate3d(0px, 0px, 0px) scale(1.00014, 1.00014); transform-origin: 10.025px 10.8039px;" transformOrigin="50% 50% 0"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" fill="currentColor"></path></svg></div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    private Product? product = null;
+    private string message = string.Empty;
+
+    [Parameter]
+    public int Id { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        message = "Loading Product..";
+        var result = await ProductService.GetProduct(Id);
+        if (!result.Success)
+        {
+            message = result.Message;
+        }
+        else
+        {
+            product = result.Data;
+        }
+    }
+}
