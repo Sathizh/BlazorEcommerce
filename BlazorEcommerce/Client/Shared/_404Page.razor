@@ -1,0 +1,10 @@
+﻿<div class="flex flex-col gap-5 justify-center align-baseline  items-center h-screen w-full">
+    <div class="text-7xl font-bold">@statusCode ~ @message</div>
+
+</div>
+@code{
+    [Parameter]
+    public string message { get; set; } = string.Empty;
+    [Parameter]
+    public int statusCode { get; set; } = 200;
+}
