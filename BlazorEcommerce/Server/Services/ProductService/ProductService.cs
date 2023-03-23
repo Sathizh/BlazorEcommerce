@@ -17,12 +17,13 @@
             {
                 response.Success = false;
                 response.Message = "Sorry, Product does not exist.";
+                response.StatusCode = 404;
             }
             else
             {
-                response.Success = true;
                 response.Data = product;
                 response.Message = "Product found";
+                response.StatusCode = 200;
             }
             return response;
         }
